@@ -12,6 +12,14 @@ int main(int argc, char **argv) {
     //       - 连续存储；
     //       的张量占用的字节数
     // int size =
+    int size = std::accumulate(
+        std::begin(shape),          // 数组起始迭代器
+        std::end(shape),            // 数组结束迭代器
+        static_cast<int>(sizeof(DataType)),  // 初始值：单个float的字节数（4）
+        [](int acc, int val) {      // 累加函数：acc * val（乘积逻辑）
+            return acc * val;
+        }
+    );
     ASSERT(size == 602112, "4x1x3x224x224 = 602112");
     return 0;
 }

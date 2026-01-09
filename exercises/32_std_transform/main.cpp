@@ -9,6 +9,19 @@
 int main(int argc, char **argv) {
     std::vector<int> val{8, 13, 21, 34, 55};
     // TODO: 调用 `std::transform`，将 `v` 中的每个元素乘以 2，并转换为字符串，存入 `ans`
+    // 初始化结果容器，大小和val一致（为transform提供可写入的空间）
+    std::vector<std::string> ans(val.size());
+    
+    // 调用std::transform完成转换：整数×2 → 字符串
+    std::transform(
+        val.begin(),          // 源容器起始迭代器
+        val.end(),            // 源容器结束迭代器
+        ans.begin(),          // 目标容器起始迭代器
+        [](int num) {         // 转换函数（lambda表达式）
+            // 将整数转换为字符串
+            return std::to_string(num * 2);
+        }
+    );
     // std::vector<std::string> ans
     ASSERT(ans.size() == val.size(), "ans size should be equal to val size");
     ASSERT(ans[0] == "16", "ans[0] should be 16");
